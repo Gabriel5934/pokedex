@@ -1,6 +1,8 @@
 // Components
 import Banner from './components/Banner'
 import ConfigBar from './components/ConfigBar'
+import PokemonCard from './components/PokemonCard';
+import PokemonCardCompact from './components/PokemonCardCompact';
 
 // MaterialUI
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -21,6 +23,8 @@ function App() {
     <Banner/>
     <div className='content-wrapper'>
       <ConfigBar/>
+      <PokemonCard/>
+      <PokemonCardCompact/>
     </div>
   </ThemeProvider>
   );
