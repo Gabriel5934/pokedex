@@ -1,5 +1,6 @@
 // MaterialUI
 import "@fontsource/roboto";
+import { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -30,6 +31,22 @@ const useStyles = makeStyles((theme) => ({
 function ConfigBar(props) {
   const classes = useStyles();
 
+  const [generation, setGeneration] = useState(" ");
+  const [viewMode, setViewMode] = useState("normal");
+  const [theme, setTheme] = useState("light");
+
+  function changeGeneration(event) {
+    setGeneration(event.target.value);
+  }
+
+  function changeViewMode(event, newMode) {
+    setViewMode(newMode);
+  }
+
+  function changeTheme(event, newTheme) {
+    setTheme(newTheme);
+  }
+
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -39,35 +56,56 @@ function ConfigBar(props) {
           type="search"
           variant="outlined"
           className={classes.formControl}
-          color='secondary'
+          color="secondary"
         />
-        <FormControl variant="outlined" className={classes.formControl} color='secondary'>
-          <InputLabel>Geração</InputLabel>
-          <Select>
-            <MenuItem>Todas</MenuItem>
-            <MenuItem>I</MenuItem>
-            <MenuItem>II</MenuItem>
-            <MenuItem>III</MenuItem>
-            <MenuItem>IV</MenuItem>
-            <MenuItem>V</MenuItem>
-            <MenuItem>VI</MenuItem>
-            <MenuItem>VII</MenuItem>
-            <MenuItem>VIII</MenuItem>
+        <FormControl
+          variant="outlined"
+          className={classes.formControl}
+          color="secondary"
+        >
+          <InputLabel id="generation-select-label">Geração</InputLabel>
+          <Select
+            labelId="generation-select-label"
+            value={generation}
+            onChange={changeGeneration}
+            label="Geração"
+          >
+            <MenuItem value="Todas">Todas</MenuItem>
+            <MenuItem value="I">I</MenuItem>
+            <MenuItem value="II">II</MenuItem>
+            <MenuItem value="II">III</MenuItem>
+            <MenuItem value="IV">IV</MenuItem>
+            <MenuItem value="V">V</MenuItem>
+            <MenuItem value="VI">VI</MenuItem>
+            <MenuItem value="VII">VII</MenuItem>
+            <MenuItem value="VIII">VIII</MenuItem>
           </Select>
         </FormControl>
-        <ToggleButtonGroup exclusive aria-label="Modo de visualização">
-          <ToggleButton value="center" aria-label="Visualização normal">
+
+        <ToggleButtonGroup
+          exclusive
+          aria-label="Modo de visualização"
+          value={viewMode}
+          onChange={changeViewMode}
+        >
+          <ToggleButton value="normal" aria-label="Visualização normal">
             <ViewModuleIcon />
           </ToggleButton>
-          <ToggleButton value="left" aria-label="Visualização compacta">
+          <ToggleButton value="compact" aria-label="Visualização compacta">
             <ViewListIcon />
           </ToggleButton>
         </ToggleButtonGroup>
-        <ToggleButtonGroup exclusive aria-label="Tema">
-          <ToggleButton value="left" aria-label="Tema claro">
+
+        <ToggleButtonGroup
+          exclusive
+          aria-label="Tema"
+          value={theme}
+          onChange={changeTheme}
+        >
+          <ToggleButton value="light" aria-label="Tema claro">
             <Brightness7Icon />
           </ToggleButton>
-          <ToggleButton value="center" aria-label="Tema escuro">
+          <ToggleButton value="dark" aria-label="Tema escuro">
             <Brightness2Icon />
           </ToggleButton>
         </ToggleButtonGroup>
