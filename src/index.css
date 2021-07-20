@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 300px;
+}
+
+.banner-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  filter: brightness(25%);
+}
+
+.banner-title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+.content-wrapper {
+  margin: 0 10vw 0 10vw;
+}
