@@ -73,25 +73,31 @@ function HomePage(props) {
     <ThemeProvider theme={materialTheme}>
       <Banner />
       {theme === 'light' && (
-        <div className="content-wrapper">
-          <ConfigBar theme={theme} changeTheme={changeTheme} />
-          <PokemonCard
-            theme={theme}
-            loadMore={loadMore}
-            pokemons={pokemons}
-            endOflist={endOflist}
-          />
+        <div style={{ width: '100%', heigth: '100%' }}>
+          <div className="content-wrapper">
+            <ConfigBar theme={theme} changeTheme={changeTheme} />
+            <PokemonCard
+              theme={theme}
+              loadMore={loadMore}
+              pokemons={pokemons}
+              endOflist={endOflist}
+            />
+          </div>
         </div>
       )}
       {theme === 'dark' && (
-        <div className="content-wrapper dark">
-          <ConfigBar theme={theme} changeTheme={changeTheme} />
-          <PokemonCard
-            theme={theme}
-            loadMore={loadMore}
-            pokemons={pokemons}
-            endOflist={endOflist}
-          />
+        <div
+          style={{ width: '100%', heigth: '100%', backgroundColor: '#121212' }}
+        >
+          <div className="content-wrapper dark">
+            <ConfigBar theme={theme} changeTheme={changeTheme} />
+            <PokemonCard
+              theme={theme}
+              loadMore={loadMore}
+              pokemons={pokemons}
+              endOflist={endOflist}
+            />
+          </div>
         </div>
       )}
     </ThemeProvider>

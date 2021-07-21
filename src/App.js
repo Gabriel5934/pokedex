@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 
 // Components
 import HomePage from './pages/Home'
+import PokemonPage from './pages/Pokemon'
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         <HomePage />
       </Route>
       <Route path="/pokemon/:pokemon">
-        <div>Hi!</div>
+        <PokemonPage />
       </Route>
       <Route path="/">
         <div>404</div>
