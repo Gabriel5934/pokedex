@@ -1,11 +1,11 @@
 // Components
 import Banner from './components/Banner'
 import ConfigBar from './components/ConfigBar'
-import PokemonCard from './components/PokemonCard';
-import PokemonCardCompact from './components/PokemonCardCompact';
+import PokemonCard from './components/PokemonCard'
+import PokemonCardCompact from './components/PokemonCardCompact'
 
 // MaterialUI
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 
 const theme = createTheme({
   palette: {
@@ -16,7 +16,7 @@ const theme = createTheme({
       main: '#424242',
     }
   },
-});
+})
 
 function App() {
   return ( <ThemeProvider theme={theme}>
@@ -24,10 +24,9 @@ function App() {
     <div className='content-wrapper'>
       <ConfigBar/>
       <PokemonCard/>
-      <PokemonCardCompact/>
     </div>
   </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App

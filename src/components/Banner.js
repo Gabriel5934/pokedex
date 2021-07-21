@@ -1,5 +1,5 @@
 // Stylesheets
-import '../index.css';
+import '../index.css'
 
 function Banner(props) {
   return (

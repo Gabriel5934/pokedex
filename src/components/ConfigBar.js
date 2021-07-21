@@ -1,5 +1,5 @@
 // MaterialUI
-import { useState } from 'react';
+import { useState } from 'react'
 import {
   AppBar,
   Toolbar,
@@ -9,13 +9,13 @@ import {
   InputLabel,
   Select,
   MenuItem,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import ViewListIcon from '@material-ui/icons/ViewList';
-import ViewModuleIcon from '@material-ui/icons/ViewModule';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import Brightness2Icon from '@material-ui/icons/Brightness2';
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab'
+import ViewListIcon from '@material-ui/icons/ViewList'
+import ViewModuleIcon from '@material-ui/icons/ViewModule'
+import Brightness7Icon from '@material-ui/icons/Brightness7'
+import Brightness2Icon from '@material-ui/icons/Brightness2'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -25,25 +25,25 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
-}));
+}))
 
 function ConfigBar(props) {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const [generation, setGeneration] = useState(' ');
-  const [viewMode, setViewMode] = useState('normal');
-  const [theme, setTheme] = useState('light');
+  const [generation, setGeneration] = useState('Todas')
+  const [viewMode, setViewMode] = useState('normal')
+  const [theme, setTheme] = useState('light')
 
   function changeGeneration(event) {
-    setGeneration(event.target.value);
+    setGeneration(event.target.value)
   }
 
   function changeViewMode(event, newMode) {
-    setViewMode(newMode);
+    setViewMode(newMode)
   }
 
   function changeTheme(event, newTheme) {
-    setTheme(newTheme);
+    setTheme(newTheme)
   }
 
   return (
@@ -110,7 +110,7 @@ function ConfigBar(props) {
         </ToggleButtonGroup>
       </Toolbar>
     </AppBar>
-  );
+  )
 }
 
-export default ConfigBar;
+export default ConfigBar

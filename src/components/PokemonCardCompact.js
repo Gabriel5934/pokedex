@@ -1,4 +1,4 @@
-import { Typography, Grid } from "@material-ui/core";
+import { Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -28,20 +28,20 @@ function PokemonCardCompact(props) {
 
   return (
     <TableContainer>
-      <Table className={classes.table} aria-label="Tabela da Pokédex">
+      <Table className={classes.table} aria-label='Tabela da Pokédex'>
         <TableHead>
           <TableRow>
             <TableCell>Nome</TableCell>
-            <TableCell align="right">Número</TableCell>
+            <TableCell align='right'>Número</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
+              <TableCell component='th' scope='row'>
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.number}</TableCell>
+              <TableCell align='right'>{row.number}</TableCell>
             </TableRow>
           ))}
         </TableBody>
