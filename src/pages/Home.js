@@ -1,11 +1,14 @@
 // React
 import { useState } from 'react'
+import React from 'react'
 
 // Components
 import Banner from '../components/Banner'
 import ConfigBar from '../components/ConfigBar'
 import PokemonCard from '../components/PokemonCard'
-import PokemonCardCompact from '../components/PokemonCardCompact'
+
+// Axios
+import axios from 'axios'
 
 // MaterialUI
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
@@ -21,8 +24,50 @@ const materialTheme = createTheme({
   },
 })
 
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
 function HomePage(props) {
   const [theme, changeTheme] = useState('light')
+  const [pokemons, addPokemon] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [endOflist, setEndOfList] = useState(false)
+
+  function getPokemons(offset, limit) {
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
+      .then((response) => {
+        response.data.results.forEach((pokemon) => {
+          addPokemon((pokemons) => [
+            ...pokemons,
+            {
+              name: capitalize(pokemon.name),
+              number: pokemon.url
+                .split('/')
+                .filter((i) => i !== '')
+                .pop(),
+              official_artwork_url: pokemon.url,
+            },
+          ])
+        })
+      })
+  }
+
+  React.useEffect(() => {
+    let limit
+    if (offset >= 864) {
+      limit = 34
+      setEndOfList(true)
+    } else {
+      limit = 48
+    }
+    getPokemons(offset, limit)
+  }, [offset])
+
+  function loadMore() {
+    setOffset(offset + 48)
+  }
 
   return (
     <ThemeProvider theme={materialTheme}>
@@ -30,13 +75,23 @@ function HomePage(props) {
       {theme === 'light' && (
         <div className="content-wrapper">
           <ConfigBar theme={theme} changeTheme={changeTheme} />
-          <PokemonCard theme={theme} />
+          <PokemonCard
+            theme={theme}
+            loadMore={loadMore}
+            pokemons={pokemons}
+            endOflist={endOflist}
+          />
         </div>
       )}
       {theme === 'dark' && (
         <div className="content-wrapper dark">
           <ConfigBar theme={theme} changeTheme={changeTheme} />
-          <PokemonCard theme={theme} />
+          <PokemonCard
+            theme={theme}
+            loadMore={loadMore}
+            pokemons={pokemons}
+            endOflist={endOflist}
+          />
         </div>
       )}
     </ThemeProvider>

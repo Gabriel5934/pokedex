@@ -6,3 +6,15 @@
 .pokemon_name {
   text-align: center;
 }
+
+.gutterBottom {
+  margin-bottom: 16px !important;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.no_decoration {
+  text-decoration: none;
+}
