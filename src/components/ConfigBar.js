@@ -32,7 +32,6 @@ function ConfigBar(props) {
 
   const [generation, setGeneration] = useState('Todas')
   const [viewMode, setViewMode] = useState('normal')
-  const [theme, setTheme] = useState('light')
 
   function changeGeneration(event) {
     setGeneration(event.target.value)
@@ -42,69 +41,69 @@ function ConfigBar(props) {
     setViewMode(newMode)
   }
 
-  function changeTheme(event, newTheme) {
-    setTheme(newTheme)
+  function handleThemeChange(event, newTheme) {
+    props.changeTheme(newTheme)
   }
 
   return (
-    <AppBar position='sticky'>
+    <AppBar position="sticky">
       <Toolbar>
         <TextField
-          id='outlined-search'
-          label='Nome ou número'
-          type='search'
-          variant='outlined'
+          id="outlined-search"
+          label="Nome ou número"
+          type="search"
+          variant="outlined"
           className={classes.formControl}
-          color='secondary'
+          color="secondary"
         />
         <FormControl
-          variant='outlined'
+          variant="outlined"
           className={classes.formControl}
-          color='secondary'
+          color="secondary"
         >
-          <InputLabel id='generation-select-label'>Geração</InputLabel>
+          <InputLabel id="generation-select-label">Geração</InputLabel>
           <Select
-            labelId='generation-select-label'
+            labelId="generation-select-label"
             value={generation}
             onChange={changeGeneration}
-            label='Geração'
+            label="Geração"
           >
-            <MenuItem value='Todas'>Todas</MenuItem>
-            <MenuItem value='I'>I</MenuItem>
-            <MenuItem value='II'>II</MenuItem>
-            <MenuItem value='II'>III</MenuItem>
-            <MenuItem value='IV'>IV</MenuItem>
-            <MenuItem value='V'>V</MenuItem>
-            <MenuItem value='VI'>VI</MenuItem>
-            <MenuItem value='VII'>VII</MenuItem>
-            <MenuItem value='VIII'>VIII</MenuItem>
+            <MenuItem value="Todas">Todas</MenuItem>
+            <MenuItem value="I">I</MenuItem>
+            <MenuItem value="II">II</MenuItem>
+            <MenuItem value="II">III</MenuItem>
+            <MenuItem value="IV">IV</MenuItem>
+            <MenuItem value="V">V</MenuItem>
+            <MenuItem value="VI">VI</MenuItem>
+            <MenuItem value="VII">VII</MenuItem>
+            <MenuItem value="VIII">VIII</MenuItem>
           </Select>
         </FormControl>
 
         <ToggleButtonGroup
           exclusive
-          aria-label='Modo de visualização'
+          aria-label="Modo de visualização"
           value={viewMode}
           onChange={changeViewMode}
         >
-          <ToggleButton value='normal' aria-label='Visualização normal'>
+          <ToggleButton value="normal" aria-label="Visualização normal">
             <ViewModuleIcon />
           </ToggleButton>
-          <ToggleButton value='compact' aria-label='Visualização compacta'>
+          <ToggleButton value="compact" aria-label="Visualização compacta">
             <ViewListIcon />
           </ToggleButton>
         </ToggleButtonGroup>
 
         <ToggleButtonGroup
           exclusive
-          aria-label='Tema'
-          value={theme}
-          onChange={changeTheme}
+          aria-label="Tema"
+          value={props.theme}
+          onChange={handleThemeChange}
         >
-          <ToggleButton value='light' aria-label='Tema claro'>
+          <ToggleButton value="light" aria-label="Tema claro">
             <Brightness7Icon />
           </ToggleButton>
-          <ToggleButton value='dark' aria-label='Tema escuro'>
+          <ToggleButton value="dark" aria-label="Tema escuro">
             <Brightness2Icon />
           </ToggleButton>
         </ToggleButtonGroup>

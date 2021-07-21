@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+.dark {
+  background-color: #121212;
+}
+
 .banner {
   display: flex;
   justify-content: center;
