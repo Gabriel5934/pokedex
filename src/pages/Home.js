@@ -7,9 +7,6 @@ import Banner from '../components/Banner'
 import ConfigBar from '../components/ConfigBar'
 import PokemonCard from '../components/PokemonCard'
 
-// Stylesheets
-import classes from '../components/styles/PokemonDetails.module.css'
-
 // Axios
 import axios from 'axios'
 
@@ -39,6 +36,15 @@ function HomePage(props) {
     localStorage.getItem('theme') || 'light'
   )
   const [textQuery, setTextQuery] = useState('')
+
+  if (
+    !localStorage.getItem('theme') &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  ) {
+    changeTheme('dark')
+    localStorage.setItem('theme', 'dark')
+  }
 
   React.useEffect(() => {
     let limit = 48
