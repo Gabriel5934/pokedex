@@ -44,6 +44,7 @@ function ConfigBar(props) {
   }
 
   function handleThemeChange(event, newTheme) {
+    localStorage.setItem('theme', newTheme)
     props.changeTheme(newTheme)
   }
 

@@ -6,6 +6,9 @@ import React from 'react'
 import ConfigBar from '../components/ConfigBar'
 import PokemonDetails from '../components/PokemonDetails'
 
+// Stylesheets
+import classes from '../components/styles/PokemonDetails.module.css'
+
 // MaterialUI
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 
@@ -25,6 +28,9 @@ const materialTheme = createTheme({
 
 function PokemonPage(props) {
   const [pokemonData, setPokemonData] = useState()
+  const [theme, changeTheme] = useState(
+    localStorage.getItem('theme') || 'light'
+  )
 
   function getPokemonDetails() {
     console.log('Requesting')
@@ -61,8 +67,12 @@ function PokemonPage(props) {
 
   return (
     <ThemeProvider theme={materialTheme}>
-      <ConfigBar />
-      <PokemonDetails pokemonData={pokemonData} />
+      <div
+        className={`${theme === 'dark' && classes.darker} ${classes.container}`}
+      >
+        <ConfigBar theme={theme} changeTheme={changeTheme} />
+        <PokemonDetails pokemonData={pokemonData} theme={theme} />
+      </div>
     </ThemeProvider>
   )
 }

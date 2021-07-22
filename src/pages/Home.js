@@ -7,6 +7,9 @@ import Banner from '../components/Banner'
 import ConfigBar from '../components/ConfigBar'
 import PokemonCard from '../components/PokemonCard'
 
+// Stylesheets
+import classes from '../components/styles/PokemonDetails.module.css'
+
 // Axios
 import axios from 'axios'
 
@@ -29,10 +32,12 @@ function capitalize(string) {
 }
 
 function HomePage(props) {
-  const [theme, changeTheme] = useState('light')
   const [pokemons, addPokemon] = useState([])
   const [offset, setOffset] = useState(0)
   const [endOflist, setEndOfList] = useState(false)
+  const [theme, changeTheme] = useState(
+    localStorage.getItem('theme') || 'light'
+  )
 
   function getPokemons(offset, limit) {
     axios
@@ -71,34 +76,40 @@ function HomePage(props) {
 
   return (
     <ThemeProvider theme={materialTheme}>
-      <Banner />
-      <ConfigBar theme={theme} changeTheme={changeTheme} />
-      {theme === 'light' && (
-        <div style={{ width: '100%', heigth: '100%' }}>
-          <div className="content-wrapper">
-            <PokemonCard
-              theme={theme}
-              loadMore={loadMore}
-              pokemons={pokemons}
-              endOflist={endOflist}
-            />
+      <div className={classes.container}>
+        <Banner />
+        <ConfigBar theme={theme} changeTheme={changeTheme} />
+        {theme === 'light' && (
+          <div style={{ width: '100%', heigth: '100%' }}>
+            <div className="content-wrapper">
+              <PokemonCard
+                theme={theme}
+                loadMore={loadMore}
+                pokemons={pokemons}
+                endOflist={endOflist}
+              />
+            </div>
           </div>
-        </div>
-      )}
-      {theme === 'dark' && (
-        <div
-          style={{ width: '100%', heigth: '100%', backgroundColor: '#121212' }}
-        >
-          <div className="content-wrapper dark">
-            <PokemonCard
-              theme={theme}
-              loadMore={loadMore}
-              pokemons={pokemons}
-              endOflist={endOflist}
-            />
+        )}
+        {theme === 'dark' && (
+          <div
+            style={{
+              width: '100%',
+              heigth: '100%',
+              backgroundColor: '#121212',
+            }}
+          >
+            <div className="content-wrapper dark">
+              <PokemonCard
+                theme={theme}
+                loadMore={loadMore}
+                pokemons={pokemons}
+                endOflist={endOflist}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </ThemeProvider>
   )
 }

@@ -18,8 +18,11 @@ function PokemonDetails(props) {
   return (
     <div>
       {pokemonData !== undefined && (
-        <div className={classes.base}>
-          <Paper>
+        <div
+          className={classes.base}
+          style={{ backgroundColor: 'transparent' }}
+        >
+          <Paper className={props.theme === 'dark' && classes.dark}>
             <Grid
               container
               justifyContent="center"
@@ -80,7 +83,7 @@ function PokemonDetails(props) {
                   <Typography variant="h4" className={classes.pokemon_info}>
                     Habilidades:{' '}
                     {pokemonData.abilities.map((ability, pos) => {
-                      if (pos !== pokemonData.types.length - 1) {
+                      if (pos !== pokemonData.abilities.length - 1) {
                         return `${capitalize(ability)}, `
                       } else {
                         return capitalize(ability)

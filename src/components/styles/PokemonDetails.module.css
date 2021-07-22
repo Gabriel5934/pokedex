@@ -13,3 +13,17 @@
 .pokemon_info {
   color: #fff;
 }
+
+.dark {
+  background-color: #1f1b24 !important;
+  color: #fff;
+}
+
+.darker {
+  background-color: #121212 !important;
+  color: #fff;
+}
+
+.container {
+  height: 100vh;
+}

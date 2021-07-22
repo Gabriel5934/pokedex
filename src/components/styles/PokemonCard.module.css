@@ -8,7 +8,7 @@
 }
 
 .gutterBottom {
-  margin-bottom: 16px !important;
+  padding: 24px 0 24px 0;
 }
 
 .text_center {
@@ -17,4 +17,8 @@
 
 .no_decoration {
   text-decoration: none;
+}
+
+.container {
+  height: 100vh;
 }
