@@ -23,7 +23,7 @@ function TypePage(props) {
   )
 
   function getTypePokemons() {
-    PokeAPI.Type.resolve(window.location.href.split('/')[4])
+    PokeAPI.Type.resolve(window.location.href.split('/').pop())
       .then((response) => {
         response.pokemon.forEach((pokemon) => {
           addPokemon((pokemons) => [
@@ -52,7 +52,7 @@ function TypePage(props) {
       <NavBar theme={theme} changeTheme={changeTheme} />
       <div className={`content-wrapper ${theme === 'dark' && 'dark'}`}>
         <Typography variant="h4" className={theme === 'dark' && 'dark'}>
-          {capitalize(window.location.href.split('/')[4])}
+          {capitalize(window.location.href.split('/').pop())}
         </Typography>
         <PokemonCard
           pokemons={pokemons}

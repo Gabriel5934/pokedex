@@ -33,7 +33,7 @@ function PokemonPage(props) {
   )
 
   function getPokemonDetails() {
-    PokeAPI.Pokemon.resolve(window.location.href.split('/')[4])
+    PokeAPI.Pokemon.resolve(window.location.href.split('/').pop())
       .then((response) => {
         setPokemonData({
           sprite: response.sprites.other['official-artwork'].front_default,

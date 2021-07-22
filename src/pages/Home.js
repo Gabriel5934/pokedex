@@ -96,7 +96,6 @@ function HomePage(props) {
         })
     } else {
       PokeAPI.Pokemon.list(limit, offset).then((response) => {
-        console.log(response)
         response.results.forEach((pokemon) => {
           addPokemon((pokemons) => [
             ...pokemons,

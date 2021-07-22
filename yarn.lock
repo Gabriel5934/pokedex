@@ -1794,6 +1794,11 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
+"@types/gh-pages@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/gh-pages/-/gh-pages-3.0.1.tgz#37108a3a8a5c9827ca8094c1ec8efde09e556518"
+  integrity sha512-QMqYL/ypwGcNpbXV4LFuwZybxhEcGk64YhOJ+YA1Y7e2kC2mJ0ifUk/DGzveJalhLgZk0QmIb+/icTQALyg+Ow==
+
 "@types/glob@^7.1.1":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.3.tgz#e6ba80f36b7daad2c685acd9266382e68985c183"

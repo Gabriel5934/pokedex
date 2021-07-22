@@ -19,7 +19,7 @@ function App() {
         <TypePage />
       </Route>
       <Route path="/">
-        <div>404</div>
+        <div>Page not Found</div>
       </Route>
     </Switch>
   )

@@ -32,7 +32,7 @@ function PokemonCard(props) {
             return (
               <Grid key={pokemon.name || pokemon.pokemon.name} item>
                 <Link
-                  to={`/pokemon/${
+                  to={`../pokemon/${
                     pokemon.name.toLowerCase() ||
                     pokemon.pokemon.name.toLowerCase().replace(' ', '-')
                   }`}
