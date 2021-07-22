@@ -40,16 +40,32 @@ function HomePage(props) {
   )
   const [generation, setGeneration] = useState('all')
   const [type, setType] = useState('all')
+  const [textQuery, setTextQuery] = useState('')
 
-  function getPokemons(url) {
+  function getPokemons(url, filtering) {
     axios.get(url).then((response) => {
-      const property = response.data.results || response.data.pokemon
+      let property =
+        response.data.results ||
+        response.data.pokemon ||
+        response.data.pokemon ||
+        response.data.pokemon_species
+
+      property = property.filter((i) => i.name.includes(textQuery))
+
       property.forEach((pokemon) => {
         addPokemon((pokemons) => [
           ...pokemons,
           {
-            name: capitalize(pokemon.name || pokemon.pokemon.name),
-            number: (pokemon.url || pokemon.pokemon.url)
+            name: capitalize(
+              pokemon.name ||
+                pokemon.pokemon.name ||
+                pokemon.pokemon_species.name
+            ),
+            number: (
+              pokemon.url ||
+              pokemon.pokemon.url ||
+              pokemon.pokemon_species.url
+            )
               .split('/')
               .filter((i) => i !== '')
               .pop(),
@@ -77,15 +93,26 @@ function HomePage(props) {
   }
 
   function onSearch() {
-    if (type !== 'all') {
-      addPokemon([])
-      getPokemons(`https://pokeapi.co/api/v2/type/${type}`)
-    } else {
-      addPokemon([])
+    const filters = {
+      generation: generation !== 'all' ? generation : false,
+      text: textQuery !== '' ? textQuery : false,
+    }
+
+    const urls = {
+      standard: `https://pokeapi.co/api/v2/pokemon/?limit=48&offset=${offset}`,
+      byGeneration: `https://pokeapi.co/api/v2/generation/${generation}`,
+    }
+
+    addPokemon([])
+
+    if (filters.generation) {
+      getPokemons(urls.byGeneration, true)
+    } else if (filters.text) {
       setOffset(0)
-      getPokemons(
-        `https://pokeapi.co/api/v2/pokemon/?limit=48&offset=${offset}`
-      )
+      getPokemons(urls.standard, true)
+    } else {
+      setOffset(0)
+      getPokemons(urls.standard)
     }
   }
 
@@ -101,6 +128,8 @@ function HomePage(props) {
           type={type}
           setType={setType}
           onSearch={onSearch}
+          textQuery={textQuery}
+          setTextQuery={setTextQuery}
         />
         {theme === 'light' && (
           <div style={{ width: '100%', heigth: '100%' }}>

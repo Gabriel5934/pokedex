@@ -6,7 +6,6 @@ import {
   AppBar,
   Toolbar,
   TextField,
-  Typography,
   FormControl,
   InputLabel,
   Select,
@@ -39,8 +38,8 @@ function ConfigBar(props) {
     props.setGeneration(event.target.value)
   }
 
-  function changeType(event) {
-    props.setType(event.target.value)
+  function changeTextQuery(event) {
+    props.setTextQuery(event.target.value)
   }
 
   function changeViewMode(event, newMode) {
@@ -62,6 +61,8 @@ function ConfigBar(props) {
           variant="outlined"
           className={classes.formControl}
           color="secondary"
+          value={props.textQuery}
+          onChange={changeTextQuery}
         />
         <FormControl
           variant="outlined"
@@ -76,47 +77,14 @@ function ConfigBar(props) {
             label="Geração"
           >
             <MenuItem value="all">Todas</MenuItem>
-            <MenuItem value="I">I</MenuItem>
-            <MenuItem value="II">II</MenuItem>
-            <MenuItem value="II">III</MenuItem>
-            <MenuItem value="IV">IV</MenuItem>
-            <MenuItem value="V">V</MenuItem>
-            <MenuItem value="VI">VI</MenuItem>
-            <MenuItem value="VII">VII</MenuItem>
-            <MenuItem value="VIII">VIII</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl
-          variant="outlined"
-          className={classes.formControl}
-          color="secondary"
-        >
-          <InputLabel id="generation-select-label">Tipo</InputLabel>
-          <Select
-            labelId="generation-select-label"
-            value={props.type}
-            onChange={changeType}
-            label="Geração"
-          >
-            <MenuItem value="all">Todos</MenuItem>
-            <MenuItem value="normal">Normal</MenuItem>
-            <MenuItem value="fighting">Lutador</MenuItem>
-            <MenuItem value="flying">Voador</MenuItem>
-            <MenuItem value="poison">Venenoso</MenuItem>
-            <MenuItem value="ground">Terra</MenuItem>
-            <MenuItem value="rock">Pedra</MenuItem>
-            <MenuItem value="bug">Inseto</MenuItem>
-            <MenuItem value="ghost">Fantasma</MenuItem>
-            <MenuItem value="steel">Metálico</MenuItem>
-            <MenuItem value="fire">Fogo</MenuItem>
-            <MenuItem value="water">Água</MenuItem>
-            <MenuItem value="grass">Planta</MenuItem>
-            <MenuItem value="eletric">Elétrico</MenuItem>
-            <MenuItem value="psychic">Psíquico</MenuItem>
-            <MenuItem value="ice">Gelo</MenuItem>
-            <MenuItem value="dragon">Dragão</MenuItem>
-            <MenuItem value="dark">Noturno</MenuItem>
-            <MenuItem value="fairy">Fada</MenuItem>
+            <MenuItem value="1">I</MenuItem>
+            <MenuItem value="2">II</MenuItem>
+            <MenuItem value="3">III</MenuItem>
+            <MenuItem value="4">IV</MenuItem>
+            <MenuItem value="5">V</MenuItem>
+            <MenuItem value="6">VI</MenuItem>
+            <MenuItem value="7">VII</MenuItem>
+            <MenuItem value="8">VIII</MenuItem>
           </Select>
         </FormControl>
 
