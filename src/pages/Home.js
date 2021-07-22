@@ -38,25 +38,26 @@ function HomePage(props) {
   const [theme, changeTheme] = useState(
     localStorage.getItem('theme') || 'light'
   )
+  const [generation, setGeneration] = useState('all')
+  const [type, setType] = useState('all')
 
-  function getPokemons(offset, limit) {
-    axios
-      .get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
-      .then((response) => {
-        response.data.results.forEach((pokemon) => {
-          addPokemon((pokemons) => [
-            ...pokemons,
-            {
-              name: capitalize(pokemon.name),
-              number: pokemon.url
-                .split('/')
-                .filter((i) => i !== '')
-                .pop(),
-              official_artwork_url: pokemon.url,
-            },
-          ])
-        })
+  function getPokemons(url) {
+    axios.get(url).then((response) => {
+      const property = response.data.results || response.data.pokemon
+      console.log(property)
+      property.forEach((pokemon) => {
+        addPokemon((pokemons) => [
+          ...pokemons,
+          {
+            name: capitalize(pokemon.name || pokemon.pokemon.name),
+            number: (pokemon.url || pokemon.pokemon.url)
+              .split('/')
+              .filter((i) => i !== '')
+              .pop(),
+          },
+        ])
       })
+    })
   }
 
   React.useEffect(() => {
@@ -67,18 +68,35 @@ function HomePage(props) {
     } else {
       limit = 48
     }
-    getPokemons(offset, limit)
+    getPokemons(
+      `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
+    )
   }, [offset])
 
   function loadMore() {
     setOffset(offset + 48)
   }
 
+  function onSearch() {
+    if (type !== 'all') {
+      addPokemon([])
+      getPokemons(`https://pokeapi.co/api/v2/type/${type}`)
+    }
+  }
+
   return (
     <ThemeProvider theme={materialTheme}>
       <div className={classes.container}>
         <Banner />
-        <ConfigBar theme={theme} changeTheme={changeTheme} />
+        <ConfigBar
+          theme={theme}
+          changeTheme={changeTheme}
+          generation={generation}
+          setGeneration={setGeneration}
+          type={type}
+          setType={setType}
+          onSearch={onSearch}
+        />
         {theme === 'light' && (
           <div style={{ width: '100%', heigth: '100%' }}>
             <div className="content-wrapper">

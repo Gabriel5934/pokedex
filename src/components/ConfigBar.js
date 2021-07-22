@@ -11,6 +11,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Button,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab'
@@ -32,11 +33,14 @@ const useStyles = makeStyles((theme) => ({
 function ConfigBar(props) {
   const classes = useStyles()
 
-  const [generation, setGeneration] = useState('Todas')
   const [viewMode, setViewMode] = useState('normal')
 
   function changeGeneration(event) {
-    setGeneration(event.target.value)
+    props.setGeneration(event.target.value)
+  }
+
+  function changeType(event) {
+    props.setType(event.target.value)
   }
 
   function changeViewMode(event, newMode) {
@@ -67,11 +71,11 @@ function ConfigBar(props) {
           <InputLabel id="generation-select-label">Geração</InputLabel>
           <Select
             labelId="generation-select-label"
-            value={generation}
+            value={props.generation}
             onChange={changeGeneration}
             label="Geração"
           >
-            <MenuItem value="Todas">Todas</MenuItem>
+            <MenuItem value="all">Todas</MenuItem>
             <MenuItem value="I">I</MenuItem>
             <MenuItem value="II">II</MenuItem>
             <MenuItem value="II">III</MenuItem>
@@ -82,6 +86,43 @@ function ConfigBar(props) {
             <MenuItem value="VIII">VIII</MenuItem>
           </Select>
         </FormControl>
+        <FormControl
+          variant="outlined"
+          className={classes.formControl}
+          color="secondary"
+        >
+          <InputLabel id="generation-select-label">Tipo</InputLabel>
+          <Select
+            labelId="generation-select-label"
+            value={props.type}
+            onChange={changeType}
+            label="Geração"
+          >
+            <MenuItem value="all">Todos</MenuItem>
+            <MenuItem value="normal">Normal</MenuItem>
+            <MenuItem value="fighting">Lutador</MenuItem>
+            <MenuItem value="flying">Voador</MenuItem>
+            <MenuItem value="poison">Venenoso</MenuItem>
+            <MenuItem value="ground">Terra</MenuItem>
+            <MenuItem value="rock">Pedra</MenuItem>
+            <MenuItem value="bug">Inseto</MenuItem>
+            <MenuItem value="ghost">Fantasma</MenuItem>
+            <MenuItem value="steel">Metálico</MenuItem>
+            <MenuItem value="fire">Fogo</MenuItem>
+            <MenuItem value="water">Água</MenuItem>
+            <MenuItem value="grass">Planta</MenuItem>
+            <MenuItem value="eletric">Elétrico</MenuItem>
+            <MenuItem value="psychic">Psíquico</MenuItem>
+            <MenuItem value="ice">Gelo</MenuItem>
+            <MenuItem value="dragon">Dragão</MenuItem>
+            <MenuItem value="dark">Noturno</MenuItem>
+            <MenuItem value="fairy">Fada</MenuItem>
+          </Select>
+        </FormControl>
+
+        <Button variant="contained" color="primary" onClick={props.onSearch}>
+          BUSCAR
+        </Button>
 
         <ToggleButtonGroup
           exclusive
