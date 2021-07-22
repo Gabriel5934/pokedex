@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Pokemon;
+  src: url('Pokemon\ Solid.ttf');
+}
+
 body {
   margin: 0;
 }
@@ -26,6 +31,11 @@ body {
   position: absolute;
   width: 100%;
   text-align: center;
+  font-family: Pokemon;
+  font-size: 96px;
+  color: #f7d421;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #2e5ba4;
 }
 
 .content-wrapper {

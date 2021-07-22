@@ -1,3 +1,6 @@
+// React
+import { Link } from 'react-router-dom'
+
 // MaterialUI
 import { Typography, Grid, Paper } from '@material-ui/core'
 
@@ -16,7 +19,7 @@ function PokemonDetails(props) {
     <div>
       {pokemonData !== undefined && (
         <div className={classes.base}>
-          <Paper style={{ backgroundColor: '#236199' }}>
+          <Paper>
             <Grid
               container
               justifyContent="center"
@@ -45,7 +48,7 @@ function PokemonDetails(props) {
                   style={{
                     padding: '16px',
                     margin: '16px',
-                    backgroundColor: '#298CE6',
+                    backgroundColor: '#2E5BA4',
                   }}
                 >
                   <Typography variant="h4" className={classes.pokemon_info}>
@@ -61,10 +64,28 @@ function PokemonDetails(props) {
                       : `${pokemonData.size} metro`}
                   </Typography>
                   <Typography variant="h4" className={classes.pokemon_info}>
-                    Tipos: {pokemonData.types}
+                    Tipos:{' '}
+                    {pokemonData.types.map((type, pos) => {
+                      if (pos !== pokemonData.types.length - 1) {
+                        return (
+                          <span>
+                            <Link>{capitalize(type)}</Link>,{' '}
+                          </span>
+                        )
+                      } else {
+                        return <Link>{capitalize(type)}</Link>
+                      }
+                    })}
                   </Typography>
                   <Typography variant="h4" className={classes.pokemon_info}>
-                    Habilidades: {pokemonData.abilities}
+                    Habilidades:{' '}
+                    {pokemonData.abilities.map((ability, pos) => {
+                      if (pos !== pokemonData.types.length - 1) {
+                        return `${capitalize(ability)}, `
+                      } else {
+                        return capitalize(ability)
+                      }
+                    })}
                   </Typography>
                   <Typography variant="h4" className={classes.pokemon_info}>
                     Velocidade:{' '}

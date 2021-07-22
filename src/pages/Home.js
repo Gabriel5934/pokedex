@@ -16,7 +16,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 const materialTheme = createTheme({
   palette: {
     primary: {
-      main: '#E54941',
+      main: '#2E5BA4',
     },
     secondary: {
       main: '#000000',
@@ -72,10 +72,10 @@ function HomePage(props) {
   return (
     <ThemeProvider theme={materialTheme}>
       <Banner />
+      <ConfigBar theme={theme} changeTheme={changeTheme} />
       {theme === 'light' && (
         <div style={{ width: '100%', heigth: '100%' }}>
           <div className="content-wrapper">
-            <ConfigBar theme={theme} changeTheme={changeTheme} />
             <PokemonCard
               theme={theme}
               loadMore={loadMore}
@@ -90,7 +90,6 @@ function HomePage(props) {
           style={{ width: '100%', heigth: '100%', backgroundColor: '#121212' }}
         >
           <div className="content-wrapper dark">
-            <ConfigBar theme={theme} changeTheme={changeTheme} />
             <PokemonCard
               theme={theme}
               loadMore={loadMore}

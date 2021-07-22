@@ -15,7 +15,7 @@ import axios from 'axios'
 const materialTheme = createTheme({
   palette: {
     primary: {
-      main: '#E54941',
+      main: '#2E5BA4',
     },
     secondary: {
       main: '#000000',

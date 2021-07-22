@@ -1,3 +1,6 @@
+// React
+import { Link } from 'react-router-dom'
+
 // Components
 import LoadMoreBtn from './LoadMoreBtn'
 
@@ -6,7 +9,6 @@ import { Typography, Grid, Paper } from '@material-ui/core'
 
 // Stylesheets
 import classes from './styles/PokemonCard.module.css'
-import { Link } from 'react-router-dom'
 
 function PokemonCard(props) {
   return (
