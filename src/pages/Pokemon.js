@@ -12,8 +12,8 @@ import classes from '../components/styles/PokemonDetails.module.css'
 // MaterialUI
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 
-// Axios
-import axios from 'axios'
+// Wrapper
+import PokeAPI from 'pokeapi-typescript'
 
 const materialTheme = createTheme({
   palette: {
@@ -33,30 +33,23 @@ function PokemonPage(props) {
   )
 
   function getPokemonDetails() {
-    axios
-      .get(
-        `https://pokeapi.co/api/v2/pokemon/${
-          window.location.href.split('/')[4]
-        }`
-      )
+    PokeAPI.Pokemon.resolve(window.location.href.split('/')[4])
       .then((response) => {
         setPokemonData({
-          sprite: response.data.sprites.other['official-artwork'].front_default,
-          name: response.data.name,
-          weight: response.data.weight / 10,
-          size: response.data.height / 10,
-          types: response.data.types.map((type) => type.type.name),
-          abilities: response.data.abilities.map(
-            (ability) => ability.ability.name
-          ),
-          stats: response.data.stats.map((stats) => ({
+          sprite: response.sprites.other['official-artwork'].front_default,
+          name: response.name,
+          weight: response.weight / 10,
+          size: response.height / 10,
+          types: response.types.map((type) => type.type.name),
+          abilities: response.abilities.map((ability) => ability.ability.name),
+          stats: response.stats.map((stats) => ({
             name: stats.stat.name,
             value: stats.base_stat,
           })),
         })
       })
       .catch((error) => {
-        console.log('Esse Pokémon não existe')
+        console.log('Esse Pokémon não existe \n' + error)
       })
   }
 

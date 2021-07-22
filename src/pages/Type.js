@@ -6,8 +6,11 @@ import React from 'react'
 import PokemonCard from '../components/PokemonCard'
 import NavBar from '../components/NavBar'
 
-// Axios
-import axios from 'axios'
+// MaterialUI
+import { Typography } from '@material-ui/core'
+
+// Wrapper
+import PokeAPI from 'pokeapi-typescript'
 
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -20,12 +23,9 @@ function TypePage(props) {
   )
 
   function getTypePokemons() {
-    axios
-      .get(
-        `https://pokeapi.co/api/v2/type/${window.location.href.split('/')[4]}`
-      )
+    PokeAPI.Type.resolve(window.location.href.split('/')[4])
       .then((response) => {
-        response.data.pokemon.forEach((pokemon) => {
+        response.pokemon.forEach((pokemon) => {
           addPokemon((pokemons) => [
             ...pokemons,
             {
@@ -39,7 +39,7 @@ function TypePage(props) {
         })
       })
       .catch((error) => {
-        console.log('Esse tipo não existe')
+        console.log('Esse tipo não existe' + error)
       })
   }
 
@@ -51,6 +51,9 @@ function TypePage(props) {
     <div className={theme === 'dark' && 'dark'}>
       <NavBar theme={theme} changeTheme={changeTheme} />
       <div className={`content-wrapper ${theme === 'dark' && 'dark'}`}>
+        <Typography variant="h4" className={theme === 'dark' && 'dark'}>
+          {capitalize(window.location.href.split('/')[4])}
+        </Typography>
         <PokemonCard
           pokemons={pokemons}
           theme={theme}

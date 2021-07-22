@@ -1,5 +1,5 @@
 // React
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 
 // Components
 import ThemeSelector from './ThemeSelector'

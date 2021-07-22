@@ -1,6 +1,3 @@
-// React
-import { Link } from 'react-router-dom'
-
 // Stylesheets
 import '../index.css'
 

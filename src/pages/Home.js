@@ -13,6 +13,9 @@ import axios from 'axios'
 // MaterialUI
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 
+// Wrapper
+import PokeAPI from 'pokeapi-typescript'
+
 const materialTheme = createTheme({
   palette: {
     primary: {
@@ -60,14 +63,14 @@ function HomePage(props) {
 
     if (textQuery !== '') {
       limit = 898
-    }
 
-    axios
-      .get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
-      .then((response) => {
-        let property = response.data.results
+      axios
+        .get(
+          `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
+        )
+        .then((response) => {
+          let property = response.data.results
 
-        if (textQuery !== '') {
           property = property.filter(
             (i) =>
               i.name.startsWith(textQuery) ||
@@ -77,9 +80,24 @@ function HomePage(props) {
                 .pop()
                 .startsWith(textQuery)
           )
-        }
 
-        property.forEach((pokemon) => {
+          property.forEach((pokemon) => {
+            addPokemon((pokemons) => [
+              ...pokemons,
+              {
+                name: capitalize(pokemon.name),
+                number: pokemon.url
+                  .split('/')
+                  .filter((i) => i !== '')
+                  .pop(),
+              },
+            ])
+          })
+        })
+    } else {
+      PokeAPI.Pokemon.list(limit, offset).then((response) => {
+        console.log(response)
+        response.results.forEach((pokemon) => {
           addPokemon((pokemons) => [
             ...pokemons,
             {
@@ -92,6 +110,7 @@ function HomePage(props) {
           ])
         })
       })
+    }
   }, [offset, textQuery])
 
   function loadMore() {

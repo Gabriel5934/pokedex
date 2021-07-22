@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 // Components
 import LoadMoreBtn from './LoadMoreBtn'
 
-// MaterialUI
-import { Typography, Grid, Paper } from '@material-ui/core'
-
 // Stylesheets
 import classes from './styles/PokemonCard.module.css'
+
+// MaterialUI
+import { Typography, Grid, Paper } from '@material-ui/core'
 
 function PokemonCard(props) {
   return (

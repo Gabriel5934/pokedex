@@ -9,7 +9,7 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core'
 
 function ConfigBar(props) {
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" style={{ marginBottom: '16px' }}>
       <Toolbar>
         <Link to="/">
           <Typography variant="h4" style={{ color: '#fff' }}>
