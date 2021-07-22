@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 // Components
 import HomePage from './pages/Home'
 import PokemonPage from './pages/Pokemon'
+import TypePage from './pages/Type'
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
       </Route>
       <Route path="/pokemon/:pokemon">
         <PokemonPage />
+      </Route>
+      <Route path="/tipo/:type">
+        <TypePage />
       </Route>
       <Route path="/">
         <div>404</div>

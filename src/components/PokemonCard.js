@@ -20,13 +20,22 @@ function PokemonCard(props) {
         className={classes.gutterBottom}
       >
         {props.pokemons.map((pokemon) => {
-          if (parseInt(pokemon.number) < 899) {
+          if (
+            parseInt(
+              pokemon.number ||
+                pokemon.pokemon.url
+                  .split('/')
+                  .filter((i) => i !== '')
+                  .pop()
+            ) < 899
+          ) {
             return (
-              <Grid key={pokemon.name} item>
+              <Grid key={pokemon.name || pokemon.pokemon.name} item>
                 <Link
-                  to={`/pokemon/${pokemon.name
-                    .toLowerCase()
-                    .replace(' ', '-')}`}
+                  to={`/pokemon/${
+                    pokemon.name.toLowerCase() ||
+                    pokemon.pokemon.name.toLowerCase().replace(' ', '-')
+                  }`}
                   className={classes.no_decoration}
                 >
                   <Paper
@@ -36,8 +45,14 @@ function PokemonCard(props) {
                     }
                   >
                     <img
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.number}.png`}
-                      alt={pokemon.name}
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+                        pokemon.number ||
+                        pokemon.pokemon.url
+                          .split('/')
+                          .filter((i) => i !== '')
+                          .pop()
+                      }.png`}
+                      alt={pokemon.name || pokemon.pokemon.name}
                       style={{
                         width: '340px',
                       }}
@@ -50,7 +65,13 @@ function PokemonCard(props) {
                           : [classes.light, classes.pokemon_name].join(' ')
                       }
                     >
-                      {`${pokemon.name} #${pokemon.number}`}
+                      {`${pokemon.name || pokemon.pokemon.name} #${
+                        pokemon.number ||
+                        pokemon.pokemon.url
+                          .split('/')
+                          .filter((i) => i !== '')
+                          .pop()
+                      }`}
                     </Typography>
                   </Paper>
                 </Link>
@@ -61,7 +82,9 @@ function PokemonCard(props) {
           }
         })}
       </Grid>
-      <LoadMoreBtn onClick={props.loadMore} endOflist={props.endOflist} />
+      {props.button && (
+        <LoadMoreBtn loadMore={props.loadMore} endOflist={props.endOflist} />
+      )}
     </div>
   )
 }

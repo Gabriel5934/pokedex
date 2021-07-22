@@ -72,11 +72,14 @@ function PokemonDetails(props) {
                       if (pos !== pokemonData.types.length - 1) {
                         return (
                           <span>
-                            <Link>{capitalize(type)}</Link>,{' '}
+                            <Link to={`/tipo/${type}`}>{capitalize(type)}</Link>
+                            ,{' '}
                           </span>
                         )
                       } else {
-                        return <Link>{capitalize(type)}</Link>
+                        return (
+                          <Link to={`/tipo/${type}`}>{capitalize(type)}</Link>
+                        )
                       }
                     })}
                   </Typography>

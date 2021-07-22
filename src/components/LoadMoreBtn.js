@@ -5,8 +5,8 @@ function LoadMoreBtn(props) {
     <Button
       variant="contained"
       color="primary"
-      onClick={props.onClick}
       disabled={props.endOflist}
+      onClick={props.loadMore}
     >
       CARREGAR MAIS
     </Button>

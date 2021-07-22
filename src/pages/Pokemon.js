@@ -3,7 +3,7 @@ import { useState } from 'react'
 import React from 'react'
 
 // Components
-import ConfigBar from '../components/ConfigBar'
+import NavBar from '../components/NavBar'
 import PokemonDetails from '../components/PokemonDetails'
 
 // Stylesheets
@@ -33,7 +33,6 @@ function PokemonPage(props) {
   )
 
   function getPokemonDetails() {
-    console.log('Requesting')
     axios
       .get(
         `https://pokeapi.co/api/v2/pokemon/${
@@ -70,7 +69,7 @@ function PokemonPage(props) {
       <div
         className={`${theme === 'dark' && classes.darker} ${classes.container}`}
       >
-        <ConfigBar theme={theme} changeTheme={changeTheme} />
+        <NavBar theme={theme} changeTheme={changeTheme} />
         <PokemonDetails pokemonData={pokemonData} theme={theme} />
       </div>
     </ThemeProvider>

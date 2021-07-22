@@ -38,129 +38,79 @@ function HomePage(props) {
   const [theme, changeTheme] = useState(
     localStorage.getItem('theme') || 'light'
   )
-  const [generation, setGeneration] = useState('all')
-  const [type, setType] = useState('all')
   const [textQuery, setTextQuery] = useState('')
 
-  function getPokemons(url, filtering) {
-    axios.get(url).then((response) => {
-      let property =
-        response.data.results ||
-        response.data.pokemon ||
-        response.data.pokemon ||
-        response.data.pokemon_species
-
-      property = property.filter((i) => i.name.includes(textQuery))
-
-      property.forEach((pokemon) => {
-        addPokemon((pokemons) => [
-          ...pokemons,
-          {
-            name: capitalize(
-              pokemon.name ||
-                pokemon.pokemon.name ||
-                pokemon.pokemon_species.name
-            ),
-            number: (
-              pokemon.url ||
-              pokemon.pokemon.url ||
-              pokemon.pokemon_species.url
-            )
-              .split('/')
-              .filter((i) => i !== '')
-              .pop(),
-          },
-        ])
-      })
-    })
-  }
-
   React.useEffect(() => {
-    let limit
-    if (offset >= 864) {
-      limit = 34
-      setEndOfList(true)
-    } else {
-      limit = 48
+    let limit = 48
+
+    if (offset === 0) {
+      addPokemon([])
     }
-    getPokemons(
-      `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
-    )
-  }, [offset])
+
+    if (offset >= 864) {
+      setEndOfList(true)
+      limit = 34
+    }
+
+    if (textQuery !== '') {
+      limit = 898
+    }
+
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
+      .then((response) => {
+        let property = response.data.results
+
+        if (textQuery !== '') {
+          property = property.filter(
+            (i) =>
+              i.name.startsWith(textQuery) ||
+              i.url
+                .split('/')
+                .filter((i) => i !== '')
+                .pop()
+                .startsWith(textQuery)
+          )
+        }
+
+        property.forEach((pokemon) => {
+          addPokemon((pokemons) => [
+            ...pokemons,
+            {
+              name: capitalize(pokemon.name),
+              number: pokemon.url
+                .split('/')
+                .filter((i) => i !== '')
+                .pop(),
+            },
+          ])
+        })
+      })
+  }, [offset, textQuery])
 
   function loadMore() {
     setOffset(offset + 48)
   }
 
-  function onSearch() {
-    const filters = {
-      generation: generation !== 'all' ? generation : false,
-      text: textQuery !== '' ? textQuery : false,
-    }
-
-    const urls = {
-      standard: `https://pokeapi.co/api/v2/pokemon/?limit=48&offset=${offset}`,
-      byGeneration: `https://pokeapi.co/api/v2/generation/${generation}`,
-    }
-
-    addPokemon([])
-
-    if (filters.generation) {
-      getPokemons(urls.byGeneration, true)
-    } else if (filters.text) {
-      setOffset(0)
-      getPokemons(urls.standard, true)
-    } else {
-      setOffset(0)
-      getPokemons(urls.standard)
-    }
-  }
-
   return (
     <ThemeProvider theme={materialTheme}>
-      <div className={classes.container}>
+      <div className={theme === 'dark' && 'dark'}>
         <Banner />
         <ConfigBar
           theme={theme}
           changeTheme={changeTheme}
-          generation={generation}
-          setGeneration={setGeneration}
-          type={type}
-          setType={setType}
-          onSearch={onSearch}
-          textQuery={textQuery}
           setTextQuery={setTextQuery}
+          setOffset={setOffset}
         />
-        {theme === 'light' && (
-          <div style={{ width: '100%', heigth: '100%' }}>
-            <div className="content-wrapper">
-              <PokemonCard
-                theme={theme}
-                loadMore={loadMore}
-                pokemons={pokemons}
-                endOflist={endOflist}
-              />
-            </div>
-          </div>
-        )}
-        {theme === 'dark' && (
-          <div
-            style={{
-              width: '100%',
-              heigth: '100%',
-              backgroundColor: '#121212',
-            }}
-          >
-            <div className="content-wrapper dark">
-              <PokemonCard
-                theme={theme}
-                loadMore={loadMore}
-                pokemons={pokemons}
-                endOflist={endOflist}
-              />
-            </div>
-          </div>
-        )}
+        <div className={`content-wrapper ${theme === 'dark' && 'dark'}`}>
+          <PokemonCard
+            theme={theme}
+            pokemons={pokemons}
+            endOflist={endOflist}
+            loadMore={loadMore}
+            button={true}
+          />
+        </div>
       </div>
     </ThemeProvider>
   )
