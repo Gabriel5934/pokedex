@@ -44,7 +44,6 @@ function HomePage(props) {
   function getPokemons(url) {
     axios.get(url).then((response) => {
       const property = response.data.results || response.data.pokemon
-      console.log(property)
       property.forEach((pokemon) => {
         addPokemon((pokemons) => [
           ...pokemons,
@@ -81,6 +80,12 @@ function HomePage(props) {
     if (type !== 'all') {
       addPokemon([])
       getPokemons(`https://pokeapi.co/api/v2/type/${type}`)
+    } else {
+      addPokemon([])
+      setOffset(0)
+      getPokemons(
+        `https://pokeapi.co/api/v2/pokemon/?limit=48&offset=${offset}`
+      )
     }
   }
 
