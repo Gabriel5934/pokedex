@@ -6,31 +6,32 @@ import React from 'react'
 import NavBar from '../components/NavBar'
 import PokemonDetails from '../components/PokemonDetails'
 
-// Stylesheets
-import classes from '../components/styles/PokemonDetails.module.css'
+// // Stylesheets
+// import classes from '../components/styles/PokemonDetails.module.css'
 
 // MaterialUI
-import { createTheme, ThemeProvider } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 // Wrapper
 import PokeAPI from 'pokeapi-typescript'
 
-const materialTheme = createTheme({
-  palette: {
-    primary: {
-      main: '#2E5BA4',
-    },
-    secondary: {
-      main: '#000000',
-    },
+const useStyles = makeStyles((theme) => ({
+  darker: {
+    backgroundColor: '#121212 !important',
+    color: '#fff',
   },
-})
+  container: {
+    height: '100vh',
+  },
+}))
 
 function PokemonPage(props) {
   const [pokemonData, setPokemonData] = useState()
   const [theme, changeTheme] = useState(
     localStorage.getItem('theme') || 'light'
   )
+
+  const classes = useStyles()
 
   function getPokemonDetails() {
     PokeAPI.Pokemon.resolve(window.location.href.split('/').pop())
@@ -58,14 +59,12 @@ function PokemonPage(props) {
   }, [])
 
   return (
-    <ThemeProvider theme={materialTheme}>
-      <div
-        className={`${theme === 'dark' && classes.darker} ${classes.container}`}
-      >
-        <NavBar theme={theme} changeTheme={changeTheme} />
-        <PokemonDetails pokemonData={pokemonData} theme={theme} />
-      </div>
-    </ThemeProvider>
+    <div
+      className={`${theme === 'dark' && classes.darker} ${classes.container}`}
+    >
+      <NavBar theme={theme} changeTheme={changeTheme} />
+      <PokemonDetails pokemonData={pokemonData} theme={theme} />
+    </div>
   )
 }
 

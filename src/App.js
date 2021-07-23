@@ -18,7 +18,7 @@ function App() {
       <Route path="/tipo/:type">
         <TypePage />
       </Route>
-      <Route path="/">
+      <Route path="*">
         <div>Page not Found</div>
       </Route>
     </Switch>

@@ -3,9 +3,41 @@ import { Link } from 'react-router-dom'
 
 // MaterialUI
 import { Typography, Grid, Paper } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
-// Stylesheets
-import classes from './styles/PokemonDetails.module.css'
+const useStyles = makeStyles((theme) => ({
+  base: {
+    backgroundColor: '#f5f5f5',
+    margin: '16px 200px 16px 200px',
+  },
+  base_small: {
+    backgroundColor: '#f5f5f5',
+    margin: '16px',
+  },
+  pokemon_name: {
+    textAlign: 'center',
+    backgroundColor: '#2e5ba4',
+    color: '#fff',
+    padding: '5px 0 5px 0',
+  },
+  pokemon_info: {
+    color: '#fff',
+  },
+  dark: {
+    backgroundColor: '#1f1b24 !important',
+    color: '#fff',
+  },
+  inner_paper: {
+    margin: '16px',
+  },
+  grid_item: {
+    width: '50%',
+  },
+  grid_item_small: {
+    width: '70%',
+  },
+}))
 
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -13,13 +45,14 @@ function capitalize(string) {
 
 function PokemonDetails(props) {
   const pokemonData = props.pokemonData
-  console.log(pokemonData)
+  const classes = useStyles()
+  const matches = useMediaQuery('(max-width:1330px)')
 
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       {pokemonData !== undefined && (
         <div
-          className={classes.base}
+          className={matches ? classes.base_small : classes.base}
           style={{ backgroundColor: 'transparent' }}
         >
           <Paper className={props.theme === 'dark' && classes.dark}>
@@ -28,11 +61,18 @@ function PokemonDetails(props) {
               justifyContent="center"
               spacing={2}
               alignItems={'center'}
+              direction={matches ? 'column' : 'row'}
             >
-              <Grid item style={{ width: '50%' }}>
+              <Grid
+                item
+                className={
+                  matches ? classes.grid_item_small : classes.grid_item
+                }
+                xs
+              >
                 <Paper
+                  className={classes.inner_paper}
                   style={{
-                    margin: '16px',
                     backgroundImage: 'url(https://i.imgur.com/Edg2E1y.jpg)',
                   }}
                 >
@@ -46,11 +86,17 @@ function PokemonDetails(props) {
                   </Typography>
                 </Paper>
               </Grid>
-              <Grid item style={{ width: '50%' }}>
+              <Grid
+                item
+                className={
+                  matches ? classes.grid_item_small : classes.grid_item
+                }
+                xs
+              >
                 <Paper
+                  className={classes.inner_paper}
                   style={{
                     padding: '16px',
-                    margin: '16px',
                     backgroundColor: '#2E5BA4',
                   }}
                 >

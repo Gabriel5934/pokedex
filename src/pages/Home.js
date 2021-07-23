@@ -12,6 +12,7 @@ import axios from 'axios'
 
 // MaterialUI
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 // Wrapper
 import PokeAPI from 'pokeapi-typescript'
@@ -24,8 +25,21 @@ const materialTheme = createTheme({
     secondary: {
       main: '#000000',
     },
+    warning: {
+      main: '#F7D421',
+    },
   },
 })
+
+const useStyles = makeStyles((theme) => ({
+  darker: {
+    backgroundColor: '#121212 !important',
+    color: '#fff',
+  },
+  content_wrapper: {
+    margin: '0 10vw 0 10vw',
+  },
+}))
 
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -34,11 +48,13 @@ function capitalize(string) {
 function HomePage(props) {
   const [pokemons, addPokemon] = useState([])
   const [offset, setOffset] = useState(0)
-  const [endOflist, setEndOfList] = useState(false)
   const [theme, changeTheme] = useState(
     localStorage.getItem('theme') || 'light'
   )
   const [textQuery, setTextQuery] = useState('')
+  const [loadMoreBtn, setLoadMoreBtn] = useState(true)
+
+  const classes = useStyles()
 
   if (
     !localStorage.getItem('theme') &&
@@ -57,7 +73,7 @@ function HomePage(props) {
     }
 
     if (offset >= 864) {
-      setEndOfList(true)
+      setLoadMoreBtn(false)
       limit = 34
     }
 
@@ -92,6 +108,7 @@ function HomePage(props) {
                   .pop(),
               },
             ])
+            setLoadMoreBtn(false)
           })
         })
     } else {
@@ -107,6 +124,7 @@ function HomePage(props) {
                 .pop(),
             },
           ])
+          setLoadMoreBtn(true)
         })
       })
     }
@@ -118,7 +136,7 @@ function HomePage(props) {
 
   return (
     <ThemeProvider theme={materialTheme}>
-      <div className={theme === 'dark' && 'dark'}>
+      <div className={theme === 'dark' && classes.darker}>
         <Banner />
         <ConfigBar
           theme={theme}
@@ -126,13 +144,14 @@ function HomePage(props) {
           setTextQuery={setTextQuery}
           setOffset={setOffset}
         />
-        <div className={`content-wrapper ${theme === 'dark' && 'dark'}`}>
+        <div
+          className={`${classes.content_wrapper} ${theme === 'dark' && 'dark'}`}
+        >
           <PokemonCard
             theme={theme}
             pokemons={pokemons}
-            endOflist={endOflist}
             loadMore={loadMore}
-            button={true}
+            button={loadMoreBtn}
           />
         </div>
       </div>

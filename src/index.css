@@ -1,50 +1,8 @@
 @font-face {
   font-family: Pokemon;
-  src: url('Pokemon\ Solid.ttf');
+  src: url('./content/fonts/Pokemon\ Solid.ttf');
 }
 
 body {
   margin: 0;
-}
-
-.dark {
-  background-color: #121212;
-  color: #fff;
-}
-
-.banner {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: 300px;
-}
-
-.banner-image {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  filter: brightness(25%);
-}
-
-.banner-title {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  font-family: Pokemon;
-  font-size: 96px;
-  color: #f7d421;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #2e5ba4;
-}
-
-.content-wrapper {
-  margin: 0 10vw 0 10vw;
-}
-
-@media (max-width: 770px) {
-  .content-wrapper {
-    margin: 0;
-  }
 }

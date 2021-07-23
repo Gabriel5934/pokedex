@@ -6,13 +6,25 @@ import ThemeSelector from './ThemeSelector'
 
 // MaterialUI
 import { AppBar, Toolbar, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  nav_text: {
+    color: '#fff',
+  },
+  gutterBottom: {
+    marginBottom: '16px',
+  },
+}))
 
 function ConfigBar(props) {
+  const classes = useStyles()
+
   return (
-    <AppBar position="sticky" style={{ marginBottom: '16px' }}>
+    <AppBar position="sticky" className={classes.gutterBottom}>
       <Toolbar>
         <Link to="/">
-          <Typography variant="h4" style={{ color: '#fff' }}>
+          <Typography variant="h4" className={classes.nav_text}>
             Pokédex
           </Typography>
         </Link>
