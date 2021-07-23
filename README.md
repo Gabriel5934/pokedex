@@ -10,5 +10,5 @@ You can find any Pokémon on the homepage where they are ordered by their Nation
 Or by searching by name or National Pokédex number;<br />
 Or even by clicking on a Pokémon to see its details and clicking in one of his types to see all Pokémons of that type.
 
-## Compliant with the [PokéAPI](https://pokeapi.co/) fair use policy 📜
+## Compliant with the PokéAPI fair use policy 📜
 This application caches the data it gets using the [pokeapi-typescript](https://github.com/Monbrey/pokeapi-typescript) API wrapper
