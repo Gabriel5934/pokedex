@@ -12,3 +12,8 @@ Or even by clicking on a Pokémon to see its details and clicking in one of his 
 
 ## Compliant with the PokéAPI fair use policy 📜
 This application caches the data it gets using the [pokeapi-typescript](https://github.com/Monbrey/pokeapi-typescript) API wrapper
+
+## Running this application on your machine 💻
+This applicaton requires the latest version of [NodeJS](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/). 
+- After cloning this repository, run `yarn` inside the application root directory to install all the required packages
+- Then run `yarn start` to start a local development server
