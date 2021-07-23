@@ -10,6 +10,7 @@ import PokemonDetails from '../components/PokemonDetails'
 // import classes from '../components/styles/PokemonDetails.module.css'
 
 // MaterialUI
+import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 // Wrapper
@@ -30,6 +31,7 @@ function PokemonPage(props) {
   const [theme, changeTheme] = useState(
     localStorage.getItem('theme') || 'light'
   )
+  const [notFound, setNotFound] = useState(false)
 
   const classes = useStyles()
 
@@ -50,7 +52,8 @@ function PokemonPage(props) {
         })
       })
       .catch((error) => {
-        console.log('Esse Pokémon não existe \n' + error)
+        setNotFound(true)
+        console.log(error)
       })
   }
 
@@ -63,6 +66,7 @@ function PokemonPage(props) {
       className={`${theme === 'dark' && classes.darker} ${classes.container}`}
     >
       <NavBar theme={theme} changeTheme={changeTheme} />
+      {notFound && <Typography variant="h4">Pokémon não encontrado</Typography>}
       <PokemonDetails pokemonData={pokemonData} theme={theme} />
     </div>
   )

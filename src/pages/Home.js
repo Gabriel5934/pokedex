@@ -53,6 +53,7 @@ function HomePage(props) {
   )
   const [textQuery, setTextQuery] = useState('')
   const [loadMoreBtn, setLoadMoreBtn] = useState(true)
+  const [noResults, setNoResults] = useState(false)
 
   const classes = useStyles()
 
@@ -79,7 +80,7 @@ function HomePage(props) {
 
     if (textQuery !== '') {
       limit = 898
-
+      setLoadMoreBtn(false)
       axios
         .get(
           `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
@@ -97,21 +98,26 @@ function HomePage(props) {
                 .startsWith(textQuery)
           )
 
-          property.forEach((pokemon) => {
-            addPokemon((pokemons) => [
-              ...pokemons,
-              {
-                name: capitalize(pokemon.name),
-                number: pokemon.url
-                  .split('/')
-                  .filter((i) => i !== '')
-                  .pop(),
-              },
-            ])
-            setLoadMoreBtn(false)
-          })
+          if (property.length === 0) {
+            setNoResults(true)
+          } else {
+            setNoResults(false)
+            property.forEach((pokemon) => {
+              addPokemon((pokemons) => [
+                ...pokemons,
+                {
+                  name: capitalize(pokemon.name),
+                  number: pokemon.url
+                    .split('/')
+                    .filter((i) => i !== '')
+                    .pop(),
+                },
+              ])
+            })
+          }
         })
     } else {
+      setNoResults(false)
       PokeAPI.Pokemon.list(limit, offset).then((response) => {
         response.results.forEach((pokemon) => {
           addPokemon((pokemons) => [
@@ -152,6 +158,7 @@ function HomePage(props) {
             pokemons={pokemons}
             loadMore={loadMore}
             button={loadMoreBtn}
+            noResults={noResults}
           />
         </div>
       </div>

@@ -36,6 +36,7 @@ function TypePage(props) {
   const [theme, changeTheme] = useState(
     localStorage.getItem('theme') || 'light'
   )
+  const [notFound, setNotFound] = useState(false)
 
   const classes = useStyles()
 
@@ -56,7 +57,8 @@ function TypePage(props) {
         })
       })
       .catch((error) => {
-        console.log('Esse tipo não existe' + error)
+        setNotFound(true)
+        console.log(error)
       })
   }
 
@@ -75,6 +77,7 @@ function TypePage(props) {
         <Typography variant="h4">
           {capitalize(window.location.href.split('/').pop())}
         </Typography>
+        {notFound && <Typography variant="h4">Tipo não encontrado</Typography>}
         <PokemonCard
           pokemons={pokemons}
           theme={theme}

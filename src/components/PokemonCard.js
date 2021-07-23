@@ -47,6 +47,7 @@ function PokemonCard(props) {
           : [classes.gutterBottom, classes.text_center].join(' ')
       }
     >
+      {props.noResults && <Typography>Sem resultados</Typography>}
       <Grid
         container
         justifyContent="center"
