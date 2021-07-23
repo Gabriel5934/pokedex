@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,WACE,mBAAoB,CACpB,0DACF,CAEA,KACE,QACF","file":"main.b4fe114f.chunk.css","sourcesContent":["@font-face {\n  font-family: Pokemon;\n  src: url('./content/fonts/Pokemon\\ Solid.ttf');\n}\n\nbody {\n  margin: 0;\n}\n"]}
