@@ -1,5 +1,7 @@
 # Pokédex
 
+_This project was a coding challenge for a job interview_
+
 ### Status: Deployed 🚀
 ### URL: https://gabriel5934.github.io/pokedex
 
